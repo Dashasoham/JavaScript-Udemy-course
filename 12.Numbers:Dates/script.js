@@ -85,7 +85,6 @@ const formatMovementDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
 
   if (daysPassed === 0) return "Today";
   if (daysPassed === 1) return "Yesterday";
@@ -174,14 +173,42 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  //set time to 5 minutes
+
+  //Call the timer every second
+
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const seconds = String(time % 60).padStart(2, 0);
+    // In each call, print the remaining time to Ui
+    labelTimer.textContent = `${min}:${seconds}`;
+
+    //Decrease 1sec
+
+    //When timer at 0, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+    time--;
+  };
+
+  let time = 30;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 //FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 //Experimenting with the API
 const now = new Date();
@@ -229,6 +256,9 @@ btnLogin.addEventListener("click", function (e) {
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
 
+    //TIMER
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -270,13 +300,15 @@ btnLoan.addEventListener("click", function (e) {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    //Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    // Update UI
-    updateUI(currentAccount);
+      //Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500);
   }
   inputLoanAmount.value = "";
 });
@@ -467,4 +499,48 @@ const calcDaysPassed = (date1, date2) =>
 const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 4));
 
 console.log(days1);
+
+
+const num = 388345.7;
+
+const options = {
+  style: "unit",
+  unit: "mile-per-hour",
+};
+
+console.log("US:    ", new Intl.NumberFormat("en-US", options).format(num));
+console.log(
+  "Germany:    ",
+  new Intl.NumberFormat("de-DE", options).format(num)
+);
+console.log("Syria:    ", new Intl.NumberFormat("ar-SY", options).format(num));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);
+
+
+const ingredients = ["olives", "spinach"];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here's your pizza  with ${ing1} and ${ing2}🍕`),
+  3000,
+  ...ingredients
+);
+console.log("Waiting...");
+
+if (ingredients.includes("spinach")) clearTimeout(pizzaTimer);
+
+//setInterval
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 1000);
+
+setInterval(function () {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  console.log(`${hours}:${minutes}:${seconds}`);
+}, 1000);
 */
