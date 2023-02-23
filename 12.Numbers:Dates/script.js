@@ -544,3 +544,21 @@ setInterval(function () {
   console.log(`${hours}:${minutes}:${seconds}`);
 }, 1000);
 */
+
+const orderbookInterval = setInterval(() => updateExchangeData(false), 10000);
+clearInterval(orderbookInterval);
+
+// let counter = 0;
+// const test = setInterval(function () {
+//   const now = new Date();
+//   if (++counter === 3) clearInterval(test);
+
+//   console.log(now);
+// }, 1000);
+
+let count = 3;
+for (let i = 0; i < count; i++) {
+  setTimeout(function () {
+    console.log(new Date());
+  }, 1000 * i);
+}
