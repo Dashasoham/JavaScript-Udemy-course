@@ -137,7 +137,7 @@ steven.calcAge();
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
-*/
+
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -162,3 +162,4 @@ const mike = new Student('Mike', 2020, 'Computer Science');
 console.log(mike);
 mike.introduce();
 mike.calcAge();
+*/
