@@ -240,7 +240,7 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Comp Science');
 jay.introduce();
 jay.calcAge();
-*/
+
 //
 
 //1)Public fields
@@ -314,3 +314,4 @@ console.log(acc1);
 
 //Chaining
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000);
+*/
