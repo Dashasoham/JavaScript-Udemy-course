@@ -4,6 +4,7 @@ const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
 
 ///////////////////////////////////////
+/*
 const renderCountry = function (data, className) {
   const html = `
   <article class="country ${className}">
@@ -70,3 +71,10 @@ setTimeout(() => {
     }, 1000);
   }, 1000);
 }, 1000);
+*/
+// const request = new XMLHttpRequest();
+// request.open("GET", `https://restcountries.com/v2/name/${country}`);
+// request.send();
+
+const request = fetch("https://restcountries.com/v2/name/portugal");
+console.log(request);
