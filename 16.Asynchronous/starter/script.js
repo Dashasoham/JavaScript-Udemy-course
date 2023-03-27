@@ -1,5 +1,5 @@
-// "use strict";
-
+"use strict";
+/*
 // const btn = document.querySelector(".btn-country");
 // const countriesContainer = document.querySelector(".countries");
 
@@ -26,7 +26,7 @@
 // const renderError = function (msg) {
 //   countriesContainer.insertAdjacentText("beforeend", msg);
 //   // countriesContainer.style.opacity = 1;
-// }; /*
+// }; 
 
 // const getCountryAndNeighbour = function (country) {
 //   //AJAX call country 1
@@ -77,7 +77,7 @@
 //     }, 1000);
 //   }, 1000);
 // }, 1000);
-// */
+//
 // // const request = new XMLHttpRequest();
 // // request.open("GET", `https://restcountries.com/v2/name/${country}`);
 // // request.send();
@@ -117,3 +117,36 @@ console.log("test start");
 setTimeout(() => console.log("0 sec timer"), 0);
 Promise.resolve("Resolved promise 1").then((res) => console.log(res));
 console.log("test end");
+*/
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log("Lottery draw is happening");
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve("You WIN");
+    } else {
+      reject(new Error("You lost "));
+    }
+  }, 2000);
+});
+
+lotteryPromise
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+//PROMISIFYING setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log("I waited for 2 seconds");
+    return wait(1);
+  })
+  .then(() => console.log("I've waited for 1 sec"));
+
+Promise.resolve("abc").then((x) => console.log(x));
+Promise.reject("abc").catch((x) => console.error(x));
