@@ -140,7 +140,6 @@ const wait = function (seconds) {
     setTimeout(resolve, seconds * 1000);
   });
 };
-
 wait(2)
   .then(() => {
     console.log("I waited for 2 seconds");
