@@ -53,7 +53,7 @@ const whereAmI = function (lat, longt) {
 whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
-*/
+
 // Createafunction'createImage'whichreceives'imgPath'asaninput. This function returns a promise which creates a new image (use document.createElement('img')) and sets the .src attribute to the provided image path
 // 2. When the image is done loading,append it to the DOM element with the 'images' class, and resolve the promise. The fulfilled value should be the image element itself. In case there is an error loading the image (listen for the'error' event), reject the promise
 // 3. Ifthispartistootrickyforyou,justwatchthefirstpartofthesolution
@@ -86,3 +86,4 @@ createImage("img/img-1.jpeg")
   })
   .then(() => console.log("I've wated for 2 sec"))
   .catch((err) => console.error(err));
+  */
