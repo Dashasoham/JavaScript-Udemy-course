@@ -152,7 +152,7 @@ wait(2)
 
 Promise.resolve("abc").then((x) => console.log(x));
 Promise.reject("abc").catch((x) => console.error(x));
-*/
+
 const btn = document.querySelector(".btn-country");
 
 const countriesContainer = document.querySelector(".countries");
@@ -227,3 +227,4 @@ const whereAmI = function () {
 };
 
 btn.addEventListener("click", whereAmI);
+*/

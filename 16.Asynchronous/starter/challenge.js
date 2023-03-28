@@ -54,3 +54,35 @@ whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
 */
+// Createafunction'createImage'whichreceives'imgPath'asaninput. This function returns a promise which creates a new image (use document.createElement('img')) and sets the .src attribute to the provided image path
+// 2. When the image is done loading,append it to the DOM element with the 'images' class, and resolve the promise. The fulfilled value should be the image element itself. In case there is an error loading the image (listen for the'error' event), reject the promise
+// 3. Ifthispartistootrickyforyou,justwatchthefirstpartofthesolution
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const imgContainer = document.querySelector(".images");
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement("img");
+    img.src = imgPath;
+
+    img.addEventListener("load", function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+    img.addEventListener("error", function () {
+      reject(new Error("Image not found"));
+    });
+  });
+};
+
+createImage("img/img-1.jpeg")
+  .then((img) => {
+    console.log("Image loaded");
+    wait(2);
+  })
+  .then(() => console.log("I've wated for 2 sec"))
+  .catch((err) => console.error(err));
