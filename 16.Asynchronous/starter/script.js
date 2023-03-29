@@ -278,20 +278,33 @@ const whereAmI = async function () {
     );
     if (!geoCoding.ok) throw new Error("Problem getting location country");
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     renderCountry(data[0]);
+
+    return `You are in ${dataGeo.city},${dataGeo.country}`;
   } catch (err) {
     console.log(`💥${err}`);
     renderError(`💥💥 ${err.message}`);
+
+    //Reject promise returned from async function
+
+    throw err;
   }
 };
-whereAmI();
-console.log("FIRST");
+console.log("1.Will get location");
+// const city = whereAmI();
+// console.log(city);
+// whereAmI()
+//   .then((city) => console.log(`2: ${city}`))
+//   .catch((err) => console.error(`2: ${err.message}💥`))
+//   .finally(() => console.log("3. Finished getting location"));
 
-// try {
-//   let y = 1;
-//   const x = 2;
-//   y = 3;
-// } catch (err) {
-//   alert(err.message);
-// }
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message}💥`);
+  }
+  console.log("3. Finished getting location");
+})();
